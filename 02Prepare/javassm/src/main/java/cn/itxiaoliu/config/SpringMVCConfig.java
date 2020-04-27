@@ -1,6 +1,6 @@
 package cn.itxiaoliu.config;
 
-import cn.itxiaoliu.interceptor.MyInterceptor;
+import  cn.itxiaoliu.interceptor.MyInterceptor;
 import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
