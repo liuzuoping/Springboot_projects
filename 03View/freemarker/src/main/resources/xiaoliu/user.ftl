@@ -6,6 +6,8 @@
 </head>
 <body>
 <#include './header.ftl'>
+${hello}
+${world}
 <table border="1">
     <tr>
         <td>编号</td>
@@ -14,9 +16,9 @@
         <td>性别</td>
     </tr>
     <#list users as u>
-    <#if u.id=4>
-        <#break>
-    </#if>
+    <#--<#if u.id=4>-->
+        <#--<#break>-->
+    <#--</#if>-->
         <tr>
             <td>${u.id}</td>
             <td>${u.username}</td>

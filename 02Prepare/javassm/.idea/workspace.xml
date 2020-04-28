@@ -7,10 +7,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3bbb9bbb-7953-49de-be0c-fadd90a6a10b" name="默认" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javassm.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/itxiaoliu/config/SpringMVCConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/itxiaoliu/config/SpringMVCConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/javassm-1.0-SNAPSHOT.war" beforeDir="false" afterPath="$PROJECT_DIR$/target/javassm-1.0-SNAPSHOT.war" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../actuator" beforeDir="false" afterPath="$PROJECT_DIR$/../../actuator" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../vue04" beforeDir="false" afterPath="$PROJECT_DIR$/../../vue04" afterDir="false" />
     </list>
@@ -25,6 +21,7 @@
     <session id="-1006524414">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
+          <entry key="project.closed" value="1" />
           <entry key="project.open.time.4" value="1" />
           <entry key="project.opened" value="1" />
         </counts>
@@ -55,9 +52,13 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/pom.xml">
-          <provider selected="true" editor-type-id="text-editor" />
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="112">
+              <caret line="11" column="20" selection-start-line="11" selection-start-column="20" selection-end-line="11" selection-end-column="20" />
+            </state>
+          </provider>
           <provider editor-type-id="MavenHelperPluginDependencyAnalyzer" />
         </entry>
       </file>
@@ -65,7 +66,7 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/cn/itxiaoliu/config/SpringConfig.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="38">
-              <caret line="2" column="7" lean-forward="true" selection-end-line="13" />
+              <caret line="2" column="7" selection-end-line="13" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -89,7 +90,7 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/cn/itxiaoliu/controller/HelloController.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="228">
-              <caret line="15" column="25" lean-forward="true" selection-end-line="27" />
+              <caret line="15" column="25" selection-end-line="27" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#458#459#0" expanded="true" />
@@ -120,7 +121,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/cn/itxiaoliu/interceptor/MyInterceptor.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="135">
@@ -174,7 +175,7 @@
   <component name="MavenRunner">
     <option name="vmOptions" value="-DarchetypeCatalog=internal" />
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="940" />
     <option name="width" value="980" />
     <option name="height" value="1040" />
@@ -326,7 +327,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1587990440659" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1588035000605" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="File.Encoding" />
@@ -428,12 +429,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1587983346053</updated>
-      <workItem from="1587983349853" duration="2499000" />
+      <workItem from="1587983349853" duration="4005000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="2499000" />
+    <option name="totallyTimeSpent" value="4005000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
@@ -459,7 +460,7 @@
       <window_info anchor="bottom" id="调试" weight="0.32884902" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.32884902" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32884902" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -483,14 +484,10 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor" />
-      <provider editor-type-id="MavenHelperPluginDependencyAnalyzer" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/cn/itxiaoliu/config/SpringConfig.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="38">
-          <caret line="2" column="7" lean-forward="true" selection-end-line="13" />
+          <caret line="2" column="7" selection-end-line="13" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -520,7 +517,7 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/cn/itxiaoliu/controller/HelloController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="228">
-          <caret line="15" column="25" lean-forward="true" selection-end-line="27" />
+          <caret line="15" column="25" selection-end-line="27" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#458#459#0" expanded="true" />
@@ -545,6 +542,14 @@
           </folding>
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="112">
+          <caret line="11" column="20" selection-start-line="11" selection-start-column="20" selection-end-line="11" selection-end-column="20" />
+        </state>
+      </provider>
+      <provider editor-type-id="MavenHelperPluginDependencyAnalyzer" />
     </entry>
   </component>
   <component name="masterDetails">

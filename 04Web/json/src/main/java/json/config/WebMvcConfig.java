@@ -1,14 +1,9 @@
 package json.config;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import com.alibaba.fastjson.support.config.FastJsonConfig;
+import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.converter.json.GsonHttpMessageConverter;
-import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
-
-import java.text.SimpleDateFormat;
 
 @Configuration
 public class WebMvcConfig {
@@ -34,10 +29,18 @@ public class WebMvcConfig {
 //        converter.setGson(new GsonBuilder().setDateFormat("yyyy/MM/dd").create());
 //        return converter;
 //    }
-    @Bean
-    Gson gson(){
-        return new GsonBuilder().setDateFormat("yyyy/MM/dd").create();
-    }
+//    @Bean
+//    Gson gson(){
+//        return new GsonBuilder().setDateFormat("yyyy/MM/dd").create();
+//    }
 
+    @Bean
+    FastJsonHttpMessageConverter fastJsonHttpMessageConverter(){
+        FastJsonHttpMessageConverter converter=new FastJsonHttpMessageConverter();
+        FastJsonConfig config=new FastJsonConfig();
+        config.setDateFormat("yyyy-MM-dd");
+        converter.setFastJsonConfig(config);
+        return converter;
+    }
 
 }

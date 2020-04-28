@@ -18,12 +18,14 @@ public class UserController {
         for (int i = 0; i <10 ; i++) {
             User user=new User();
             user.setId((long) i);
-            user.setUsername("javaboy>>>"+i);
-            user.setAddress("www.javaboy.org>>>"+i);
+            user.setUsername("xiaoliu>>>"+i);
+            user.setAddress("www.xiaoliu.cn>>>"+i);
             user.setGender(random.nextInt(3));
             users.add(user);
         }
         model.addAttribute("users",users);
+        model.addAttribute("hello","<h1>hello</h1>" );
+        model.addAttribute("world","<h1>world</h1>" );
         return "user";
     }
 }
