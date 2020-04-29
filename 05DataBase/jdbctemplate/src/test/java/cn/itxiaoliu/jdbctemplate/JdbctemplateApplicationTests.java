@@ -27,13 +27,13 @@ public class JdbctemplateApplicationTests {
     @Test
     public void test1(){
         User user=new User();
-        user.setId(1);
+        user.setId(2);
         user.setUsername("javaboy");
         userService.updateUsernameById(user);
     }
     @Test
     public void test2(){
-        userService.deleteUserById(1);
+        userService.deleteUserById(2);
     }
     @Test
     public void test3(){

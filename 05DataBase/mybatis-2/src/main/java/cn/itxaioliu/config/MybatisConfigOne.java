@@ -11,7 +11,8 @@ import javax.annotation.Resource;
 import javax.sql.DataSource;
 
 @Configuration
-@MapperScan(basePackages = "cn.itxaioliu.mapper1",sqlSessionFactoryRef = "sqlSessionFactory1",sqlSessionTemplateRef = "sqlSessionTemplate1")
+@MapperScan(basePackages = "cn.itxaioliu.mapper1",sqlSessionFactoryRef = "sqlSessionFactory1",
+        sqlSessionTemplateRef = "sqlSessionTemplate1")
 public class MybatisConfigOne {
     @Resource(name = "dsOne")
     DataSource dsOne;
