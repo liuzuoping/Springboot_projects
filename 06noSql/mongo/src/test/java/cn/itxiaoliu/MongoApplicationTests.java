@@ -20,9 +20,9 @@ public class MongoApplicationTests {
     @Test
     public void contextLoads() {
         Book book=new Book();
-        book.setAuthor("曹雪芹");
-        book.setName("红楼梦");
-        book.setId(2);
+        book.setAuthor("小刘");
+        book.setName("java");
+        book.setId(4);
         bookDao.insert(book);
     }
 
@@ -38,9 +38,9 @@ public class MongoApplicationTests {
     @Test
     public void test2(){
         Book book=new Book();
-        book.setId(3);
-        book.setName("水浒传");
-        book.setAuthor("施耐庵");
+        book.setId(5);
+        book.setName("python");
+        book.setAuthor("老刘");
         mongoTemplate.insert(book);
         List<Book> list = mongoTemplate.findAll(Book.class);
         System.out.println(list);

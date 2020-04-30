@@ -32,17 +32,17 @@ public class JpaApplicationTests {
         Book book=new Book();
         book.setAuthor("luoguanzhong");
         book.setName("sanguoyanyi");
-        book.setId(1);
+        book.setId(2);
         bookDao.saveAndFlush(book);
     }
 
     @Test
     public void delete(){
-        bookDao.deleteById(1);
+        bookDao.deleteById(2);
     }
     @Test
     public void find1(){
-        Optional<Book> byId = bookDao.findById(2);
+        Optional<Book> byId = bookDao.findById(3);
         System.out.println(byId.get());
         List<Book> all=bookDao.findAll();
         System.out.println(all);
@@ -72,9 +72,9 @@ public class JpaApplicationTests {
     }
     @Test
     public  void find5(){
-        List<Book> list = bookDao.findBookByIdGreaterThan(2);
+        List<Book> list = bookDao.findBookByIdGreaterThan(4);
         System.out.println(list);
-        List<Book> list1 = bookDao.findBookByIdLessThanOrNameContaining(3, "水");
+        List<Book> list1 = bookDao.findBookByIdLessThanOrNameContaining(5, "水");
         System.out.println(list1);
 
     }
@@ -85,9 +85,9 @@ public class JpaApplicationTests {
     }
     @Test
     public void test7(){
-        Integer r1 = bookDao.addBook2("呐喊", "鲁迅");
+        Integer r1 = bookDao.addBook2("java", "小刘");
         System.out.println(r1);
-        Integer r2 = bookDao.addBook("朝花夕拾", "鲁迅");
+        Integer r2 = bookDao.addBook("python", "老刘");
         System.out.println(r2);
     }
 }
