@@ -1,6 +1,6 @@
 package cn.itxiaoliu.test;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import aaxcom.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.TestTemplate;

@@ -12,7 +12,7 @@ import javax.annotation.PostConstruct;
 
 @Configuration
 @EnableWebSocketMessageBroker
-public class WEbSocketConfig implements WebSocketMessageBrokerConfigurer {
+public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 
     @Override
     public void configureMessageBroker(MessageBrokerRegistry registry) {

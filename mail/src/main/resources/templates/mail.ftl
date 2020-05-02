@@ -7,7 +7,7 @@
 <body>
 <h1>freemarker</h1>
 <div>
-    hello ${username},欢迎加入XXX大家庭!
+    hello ${username},欢迎加入java大家庭!
 </div>
 您的入职信息如下：
 <table border="1">

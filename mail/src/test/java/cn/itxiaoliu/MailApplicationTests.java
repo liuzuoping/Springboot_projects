@@ -51,7 +51,7 @@ public class MailApplicationTests {
         helper.setFrom("2330163321@qq.com");
         helper.setSentDate(new Date());
         helper.setTo("1041344803@qq.com");
-        helper.addAttachment("xiaoliu.png",new File("C:\\Users\\MI\\Pictures\\Camera Roll\\1.jpg"));
+        helper.addAttachment("xiaoliu.png",new File("C:\\Users\\MI\\Pictures\\Camera Roll\\2.jpg"));
         javaMailSender.send(msg);
     }
     @Test
@@ -63,8 +63,8 @@ public class MailApplicationTests {
         helper.setFrom("2330163321@qq.com");
         helper.setSentDate(new Date());
         helper.setTo("1041344803@qq.com");
-        helper.addInline("p01",new FileSystemResource(new File("C:\\Users\\MI\\Pictures\\Camera Roll\\1.jpg")));
-        helper.addInline("p02",new FileSystemResource(new File("C:\\Users\\MI\\Pictures\\Camera Roll\\2.jpg")));
+        helper.addInline("p01",new FileSystemResource(new File("C:\\Users\\MI\\Pictures\\Camera Roll\\2.jpg")));
+        helper.addInline("p02",new FileSystemResource(new File("C:\\Users\\MI\\Pictures\\Camera Roll\\test.jpg")));
         javaMailSender.send(msg);
     }
     @Autowired
@@ -97,7 +97,7 @@ public class MailApplicationTests {
         configuration.setClassLoaderForTemplateLoading(this.getClass().getClassLoader(),"templates" );
         Template template = configuration.getTemplate("mail.ftl");
         Map<String,Object> map=new HashMap<>();
-        map.put("username","xiaoliu" );
+        map.put("username","鲁金涛" );
         map.put("position","java工程师" );
         map.put("dep","产品研发部" );
         map.put("salary",999999 );

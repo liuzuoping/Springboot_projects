@@ -19,13 +19,13 @@ public class MyAccessDecisionManager implements AccessDecisionManager {
                 if(authentication instanceof AnonymousAuthenticationToken){
                     throw new AccessDeniedException("非法请求");
                 }else{
-                    break;
+                    return;
                 }
             }
             Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
             for (GrantedAuthority authority : authorities) {
                 if(authority.getAuthority().equals(attribute.getAttribute())){
-                    break;
+                    return;
                 }
             }
         }
