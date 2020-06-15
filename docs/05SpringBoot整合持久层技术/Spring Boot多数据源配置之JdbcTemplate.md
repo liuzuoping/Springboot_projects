@@ -50,6 +50,18 @@ spring.datasource.two.type=com.alibaba.druid.pool.DruidDataSource
 
 ```
 
+## 创建实体类
+
+```java
+public class User {
+    private Integer id;
+    private String username;
+    private String address;
+//setter&getter&toString()
+```
+
+
+
 这里通过one和two对数据源进行了区分，但是加了one和two之后，这里的配置就没法被SpringBoot自动加载了（因为前面的key变了），需要我们自己去加载DataSource了，此时，需要自己配置一个DataSourceConfig，用来提供两个DataSource Bean，如下：
 
 ```java
@@ -66,7 +78,6 @@ public class DataSourceConfig {
         return DruidDataSourceBuilder.create().build();
     }
 }
-
 ```
 
 这里提供了两个Bean，其中@ConfigurationProperties是Spring Boot提供的类型安全的属性绑定，以第一个Bean为例，`@ConfigurationProperties(prefix = "spring.datasource.one")`表示使用`spring.datasource.one`前缀的数据库配置去创建一个DataSource，这样配置之后，我们就有了两个不同的DataSource，接下来再用这两个不同的DataSource去创建两个不同的JdbcTemplate。
@@ -87,8 +98,6 @@ public class JdbcTemplateConfig {
         return new JdbcTemplate(dsTwo);
     }
 }
-
-
 ```
 
 每一个JdbcTemplate的创建都需要一个DataSource，由于Spring容器中现在存在两个DataSource，默认使用类型查找，会报错，因此加上@Qualifier注解，表示按照名称查找。这里创建了两个JdbcTemplate实例，分别对应了两个DataSource。
@@ -103,7 +112,6 @@ public class JdbcTemplateConfig {
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class Jdbctemplate2ApplicationTests {
-
     @Autowired
     @Qualifier("jdbcTemplateOne")
     JdbcTemplate jdbcTemplateOne;
@@ -120,3 +128,7 @@ public class Jdbctemplate2ApplicationTests {
 ```
 
 和DataSource一样，Spring容器中的JdbcTemplate也是有两个，因此不能通过byType的方式注入进来，这里给大伙提供了两种注入思路，一种是使用@Resource注解，直接通过byName的方式注入进来，另外一种就是`@Autowired`注解加上`@Qualifier`注解，两者联合起来，实际上也是byName。将JdbcTemplate注入进来之后，jdbcTemplateOne和jdbcTemplateTwo此时就代表操作不同的数据源，使用不同的JdbcTemplate操作不同的数据源，实现了多数据源配置。
+
+文件结构如下
+
+![1592216211080](C:\Users\MI\AppData\Roaming\Typora\typora-user-images\1592216211080.png)

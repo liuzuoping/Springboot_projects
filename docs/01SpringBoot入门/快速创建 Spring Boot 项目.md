@@ -36,25 +36,69 @@ Spring Boot 的出现让 Java 开发又回归简单，因为确确实实解决�
 
 初学者看到 Spring Boot 工程创建成功后有那么多文件就会有点懵圈，其实 Spring Boot 工程本质上就是一个 Maven 工程
 
-## 第一种方式：在线创建
+## Maven 创建
 
-这是官方提供的一个创建方式，实际上，如果我们使用开发工具去创建 Spring Boot 项目的话（即第二种方案），也是从这个网站上创建的，只不过这个过程开发工具帮助我们完成了，我们只需要在开发工具中进行简单的配置即可。
 
-首先打开 `https://start.spring.io` 这个网站，如下
 
-![1588034943631](C:\Users\MI\AppData\Roaming\Typora\typora-user-images\1588034943631.png)
+首先创建一个普通的 Maven 项目，以 IntelliJ IDEA 为例，创建步骤如下：
 
-这里要配置的按顺序分别如下：
+[![img](http://www.javaboy.org/images/boot/1-8.png)](http://www.javaboy.org/images/boot/1-8.png)
 
-- 项目构建工具是 Maven 还是 Gradle ？Java 后端，目前来看还是 Maven 为主，因此这里选择第一项。
-- 开发语言，这个当然是选择 Java 了。
-- Spring Boot 版本 ，这里我们就是用最新稳定版。
-- 既然是 Maven 工程，当然要有项目坐标，项目描述等信息了，另外这里还让输入了包名，因为创建成功后会自动创建启动类。
-- Packing 表示项目要打包成 jar 包还是 war 包，Spring Boot 的一大优势就是内嵌了 Servlet 容器，打成 jar 包后可以直接运行，所以这里建议打包成 jar 包，当然，开发者根据实际情况也可以选择 war 包。
-- 然后选选择构建的 JDK 版本。
-- 最后是选择所需要的依赖，输入关键字如 web ，会有相关的提示，这里我就先加入 web 依赖。
+注意这里不用选择项目骨架（如果大伙是做练习的话，也可以去尝试选择一下，这里大概有十来个 Spring Boot 相关的项目骨架），直接点击 Next ，下一步中填入一个 Maven 项目的基本信息，如下图
 
-所有的事情全部完成后，点击最下面的 `Generate Project` 按钮，或者点击 `Alt+Enter` 按键，此时会自动下载项目，将下载下来的项目解压，然后用 IntelliJ IDEA 或者 Eclipse 打开即可进行开发。
+
+
+然后点击 Next 完成项目的创建。
+
+创建完成后，在 pom.xml 文件中，添加如下依赖：
+
+```xml
+<parent>   
+	<groupId>org.springframework.boot</groupId>   
+	<artifactId>spring-boot-starter-parent</artifactId>    			       <version>2.1.4.RELEASE</version>
+</parent>
+<dependencies>    
+    <dependency>        
+    <groupId>org.springframework.boot</groupId>        
+    <artifactId>spring-boot-starter-web</artifactId>    
+    </dependency>
+</dependencies>
+```
+
+添加成功后，再在 main.java 目录下创建包，包中创建一个名为 启动类，如下：
+
+```java
+@SpringBootApplication
+public class HelloWorldMainApplication {
+    public static void main(String[] args) {
+        SpringApplication.run(HelloWorldMainApplication.class,args);
+    }
+}
+```
+
+然后执行这里的 main 方法就可以启动一个 Spring Boot 工程了。
+
+**创建HelloController**
+
+```java
+@RestController
+public class HelloController {
+    @RequestMapping("/hello")
+    public String hello(){
+        return "hello world";
+    }
+}
+```
+
+运行主程序访问8080端口即可
+
+# 项目结构
+
+使用工具创建出来的项目结构大致如下图：
+
+![1592182007017](C:\Users\MI\AppData\Roaming\Typora\typora-user-images\1592182007017.png)
+
+对于我们来说，src 是最熟悉的， Java 代码和配置文件写在这里，test 目录用来做测试，pom.xml 是 Maven 的坐标文件，就这几个。
 
 ## 使用开发工具创建
 
@@ -76,73 +120,94 @@ Spring Boot 的出现让 Java 开发又回归简单，因为确确实实解决�
 
 勾选完成后，点击 Next 完成项目的创建。
 
-### STS
-
-这里我再介绍下 Eclipse 派系的 STS 给大家参考， STS 创建 Spring Boot 项目，实际上也是从上一小节的那个网站上来的，步骤如下：
-
-首先右键单击，选择 New -> Spring Starter Project ，如下图：
-
-[![img](http://www.javaboy.org/images/boot/1-6.png)](http://www.javaboy.org/images/boot/1-6.png)
-
-然后在打开的页面中填入项目的相关信息，如下图：
-
-[![img](http://www.javaboy.org/images/boot/1-7.png)](http://www.javaboy.org/images/boot/1-7.png)
-
-这里的信息和前面提到的都一样，不再赘述。最后一路点击 Next ，完成项目的创建。
-
-## Maven 创建
-
-
-
-首先创建一个普通的 Maven 项目，以 IntelliJ IDEA 为例，创建步骤如下：
-
-[![img](http://www.javaboy.org/images/boot/1-8.png)](http://www.javaboy.org/images/boot/1-8.png)
-
-注意这里不用选择项目骨架（如果大伙是做练习的话，也可以去尝试选择一下，这里大概有十来个 Spring Boot 相关的项目骨架），直接点击 Next ，下一步中填入一个 Maven 项目的基本信息，如下图
-
-![1588035315263](C:\Users\MI\AppData\Roaming\Typora\typora-user-images\1588035315263.png)
-
-然后点击 Next 完成项目的创建。
-
-创建完成后，在 pom.xml 文件中，添加如下依赖：
+创建后pom文件如下
 
 ```xml
-<parent>   
-	<groupId>org.springframework.boot</groupId>   
-	<artifactId>spring-boot-starter-parent</artifactId>    			       <version>2.1.4.RELEASE</version>
-</parent>
-<dependencies>    
-<dependency>        
-<groupId>org.springframework.boot</groupId>        
-<artifactId>spring-boot-starter-web</artifactId>    
-</dependency>
-</dependencies>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>1.5.9.RELEASE</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+    <properties>
+        <java.version>1.8</java.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
 ```
 
-添加成功后，再在 java 目录下创建包，包中创建一个名为 App 的启动类，如下：
+默认生成的启动类如下
 
 ```java
-@EnableAutoConfiguration
-@RestControllerpublic 
-class App {    
-	public static void main(String[] args) {        
-		SpringApplication.run(App.class, args);    
-	}    
-	@GetMapping("/hello")    
-	public String hello() {        
-		return "hello";    
-	}
+@SpringBootApplication
+public class Springboot02Application {
+    public static void main(String[] args) {
+        SpringApplication.run(Springboot02Application.class, args);
+    }
 }
 ```
 
-@EnableAutoConfiguration 注解表示开启自动化配置。
+创建HelloController.java
 
-然后执行这里的 main 方法就可以启动一个 Spring Boot 工程了。
+```java
+@RestController
+public class HelloController {
+    @RequestMapping("/hello")
+    public String hello(){
+        return "hello world";
+    }
+}
+```
 
-# 项目结构
+运行启动类访问8080端口即可，文件结构如下
 
-使用工具创建出来的项目结构大致如下图：
+![1592182640107](C:\Users\MI\AppData\Roaming\Typora\typora-user-images\1592182640107.png)
 
-[![img](http://www.javaboy.org/images/boot/1-10.png)](http://www.javaboy.org/images/boot/1-10.png)
 
-对于我们来说，src 是最熟悉的， Java 代码和配置文件写在这里，test 目录用来做测试，pom.xml 是 Maven 的坐标文件，就这几个。
+
+
+
+## 在线创建
+
+这是官方提供的一个创建方式，实际上，如果我们使用开发工具去创建 Spring Boot 项目的话（即第二种方案），也是从这个网站上创建的，只不过这个过程开发工具帮助我们完成了，我们只需要在开发工具中进行简单的配置即可。
+
+首先打开 `https://start.spring.io` 这个网站，如下
+
+![1588034943631](C:\Users\MI\AppData\Roaming\Typora\typora-user-images\1588034943631.png)
+
+这里要配置的按顺序分别如下：
+
+- 项目构建工具是 Maven 还是 Gradle ？Java 后端，目前来看还是 Maven 为主，因此这里选择第一项。
+- 开发语言，这个当然是选择 Java 了。
+- Spring Boot 版本 ，这里我们就是用最新稳定版。
+- 既然是 Maven 工程，当然要有项目坐标，项目描述等信息了，另外这里还让输入了包名，因为创建成功后会自动创建启动类。
+- Packing 表示项目要打包成 jar 包还是 war 包，Spring Boot 的一大优势就是内嵌了 Servlet 容器，打成 jar 包后可以直接运行，所以这里建议打包成 jar 包，当然，开发者根据实际情况也可以选择 war 包。
+- 然后选选择构建的 JDK 版本。
+- 最后是选择所需要的依赖，输入关键字如 web ，会有相关的提示，这里我就先加入 web 依赖。
+
+所有的事情全部完成后，点击最下面的 `Generate Project` 按钮，或者点击 `Alt+Enter` 按键，此时会自动下载项目，将下载下来的项目解压，然后用 IntelliJ IDEA 或者 Eclipse 打开即可进行开发。
+
+
+
+
+

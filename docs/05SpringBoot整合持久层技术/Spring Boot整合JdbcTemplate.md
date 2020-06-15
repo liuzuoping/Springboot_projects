@@ -53,7 +53,7 @@ public class User {
     private Long id;
     private String username;
     private String address;
-    //省略getter/setter
+    //省略getter/setter&toString()
 }
 ```
 
@@ -64,6 +64,7 @@ public class User {
 public class UserService {
     @Autowired
     JdbcTemplate jdbcTemplate;
+    
 }
 ```
 
@@ -163,62 +164,41 @@ public List<User> getAllUsers2() {
 
 除了这些基本用法之外，JdbcTemplate也支持其他用法，例如调用存储过程等，这些都比较容易，而且和Jdbc本身都比较相似，这里也就不做介绍了，有兴趣可以留言讨论。
 
-## 原理分析
-
-那么在SpringBoot中，配置完数据库基本信息之后，就有了一个JdbcTemplate了，这个东西是从哪里来的呢？源码在`org.springframework.boot.autoconfigure.jdbc.JdbcTemplateAutoConfiguration`类中，该类源码如下：
+完整的Service如下
 
 ```java
-@Configuration
-@ConditionalOnClass({ DataSource.class, JdbcTemplate.class })
-@ConditionalOnSingleCandidate(DataSource.class)
-@AutoConfigureAfter(DataSourceAutoConfiguration.class)
-@EnableConfigurationProperties(JdbcProperties.class)
-public class JdbcTemplateAutoConfiguration {
-
-    @Configuration
-    static class JdbcTemplateConfiguration {
-
-        private final DataSource dataSource;
-
-        private final JdbcProperties properties;
-
-        JdbcTemplateConfiguration(DataSource dataSource, JdbcProperties properties) {
-            this.dataSource = dataSource;
-            this.properties = properties;
-        }
-
-        @Bean
-        @Primary
-        @ConditionalOnMissingBean(JdbcOperations.class)
-        public JdbcTemplate jdbcTemplate() {
-            JdbcTemplate jdbcTemplate = new JdbcTemplate(this.dataSource);
-            JdbcProperties.Template template = this.properties.getTemplate();
-            jdbcTemplate.setFetchSize(template.getFetchSize());
-            jdbcTemplate.setMaxRows(template.getMaxRows());
-            if (template.getQueryTimeout() != null) {
-                jdbcTemplate
-                        .setQueryTimeout((int) template.getQueryTimeout().getSeconds());
+@Service
+public class UserService {
+    @Autowired
+    JdbcTemplate jdbcTemplate;
+    public Integer addUser(User user){
+        return jdbcTemplate.update("insert into user(username,address) values(?,?);",user.getUsername(),user.getAddress());
+    }
+    public Integer updateUsernameById(User user){
+        return jdbcTemplate.update("update user set username=? where id=?",user.getUsername(),user.getId());
+    }
+    public Integer deleteUserById(Integer id){
+        return jdbcTemplate.update("delete from user where id=?",id);
+    }
+    public List<User> getAllUsers(){
+        return jdbcTemplate.query("select * from user", new RowMapper<User>() {
+            @Override
+            public User mapRow(ResultSet resultSet, int i) throws SQLException {
+                User user=new User();
+                int id=resultSet.getInt("id");
+                String username=resultSet.getString("username");
+                String address = resultSet.getString("address");
+                user.setUsername(username);
+                user.setAddress(address);
+                user.setId(id);
+                return user;
             }
-            return jdbcTemplate;
-        }
-
+        });
     }
 
-    @Configuration
-    @Import(JdbcTemplateConfiguration.class)
-    static class NamedParameterJdbcTemplateConfiguration {
-
-        @Bean
-        @Primary
-        @ConditionalOnSingleCandidate(JdbcTemplate.class)
-        @ConditionalOnMissingBean(NamedParameterJdbcOperations.class)
-        public NamedParameterJdbcTemplate namedParameterJdbcTemplate(
-                JdbcTemplate jdbcTemplate) {
-            return new NamedParameterJdbcTemplate(jdbcTemplate);
-        }
-
+    public List<User> getAllUsers2(){
+        return jdbcTemplate.query("select * from user", new BeanPropertyRowMapper<>(User.class));
     }
-
 }
 ```
 
@@ -267,3 +247,6 @@ public class JdbctemplateApplicationTests {
 
 ```
 
+文件目录如下
+
+![1592215795292](C:\Users\MI\AppData\Roaming\Typora\typora-user-images\1592215795292.png)

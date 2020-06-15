@@ -2,21 +2,18 @@
 
 在启动类父文件夹中新建WebMvcConfig.java
 
-```java
-package cn.itxiaoliu;
+文件结构如下
 
-import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+![1592212248475](C:\Users\MI\AppData\Roaming\Typora\typora-user-images\1592212248475.png)
+
+```java
 @Configuration
 public class WebMvcConfig implements WebMvcConfigurer {
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/xiaoliu").setViewName("hello");
-
     }
 }
-
 ```
 
 在templates包下新建hello.html

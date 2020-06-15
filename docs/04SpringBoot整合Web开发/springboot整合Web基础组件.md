@@ -1,17 +1,8 @@
 ## springboot整合Web基础组件
 
-在启动类父亲中新建MyServlet
+在启动类父亲中新建**MyServlet.java**
 
 ```java
-package servlet;
-
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-
 @WebServlet(urlPatterns = "/myservlet")
 public class MyServlet  extends HttpServlet {
     @Override
@@ -19,17 +10,11 @@ public class MyServlet  extends HttpServlet {
         System.out.println("MyServlet");
     }
 }
-
 ```
 
-再新建MyFilter.java
+再新建**MyFilter.java**
 
 ```java
-package servlet;
-
-import javax.servlet.*;
-import javax.servlet.annotation.WebFilter;
-import java.io.IOException;
 @WebFilter(urlPatterns = "/*")
 public class MyFilter implements Filter {
     @Override
@@ -38,17 +23,11 @@ public class MyFilter implements Filter {
         filterChain.doFilter(servletRequest,servletResponse );
     }
 }
-
 ```
 
-再新建MyRequestListener
+再新建**MyRequestListener.java**
 
 ```java
-package servlet;
-
-import javax.servlet.*;
-import javax.servlet.annotation.WebFilter;
-import java.io.IOException;
 @WebFilter(urlPatterns = "/*")
 public class MyFilter implements Filter {
     @Override
@@ -66,7 +45,13 @@ http://localhost:8080/myservlet
 
 程序输出
 
+```
 requestInitialized
 MyFilter
 MyServlet
 requestDestroyed
+```
+
+文件结构如下
+
+![1592211461432](C:\Users\MI\AppData\Roaming\Typora\typora-user-images\1592211461432.png)

@@ -39,6 +39,28 @@
 
 接下来配置多数据源，这里基本上还是和JdbcTemplate多数据源的配置方式一致，首先在application.properties中配置数据库基本信息，然后提供两个DataSource即可，这里我再把代码贴出来，里边的道理条条框框的，大伙可以参考前面的文章，这里不再赘述。
 
+文件结构如下
+
+![1592217287301](C:\Users\MI\AppData\Roaming\Typora\typora-user-images\1592217287301.png)
+
+pom文件中添加以下配置
+
+```xml
+        <resources>
+            <resource>
+                <directory>src/main/java</directory>
+                <includes>
+                    <include>**/*.xml</include>
+                </includes>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+            </resource>
+        </resources>
+```
+
+
+
 application.properties中的配置：
 
 ```java
@@ -53,7 +75,19 @@ spring.datasource.two.url=jdbc:mysql:///xiaoliu?serverTimezone=UTC
 spring.datasource.two.type=com.alibaba.druid.pool.DruidDataSource
 ```
 
-然后再提供两个DataSource，如下：
+创建实体类
+
+```java
+public class User {
+    private Integer id;
+    private String username;
+    private String address;
+    //getter&setter&toString()
+```
+
+
+
+然后再提供两个DataSource的DataSourceConfig.java，如下：
 
 ```java
 @Configuration

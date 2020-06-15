@@ -7,11 +7,6 @@ spring boot中的欢迎也可以是静态的，定义在resources文件夹下的
 例如在启动类新建HelloController
 
 ```java
-package cn.itxiaoliu.welcome;
-
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-
 @Controller
 public class HelloController {
     @GetMapping("/index")
@@ -45,7 +40,7 @@ public class HelloController {
 
 favicon在线制作网站 https://tool.lu/favicon/ 
 
-制作好后将其复制至resources目录下便可生效
+制作好后将其复制至static目录或者resources目录下便可生效
 
 ### SpringBoot除去自动化配置
 

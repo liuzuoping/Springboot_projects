@@ -3,13 +3,6 @@
 在启动类父文件夹中新建UserController.java
 
 ```java
-package cn.itxiaoliu;
-
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import java.util.Date;
-
 @RestController
 public class UserController {
     @GetMapping("/hello")
@@ -17,7 +10,6 @@ public class UserController {
         System.out.println(birth);
     }
 }
-
 ```
 
 浏览器输入
@@ -29,14 +21,6 @@ http://localhost:8080/hello?birth=1996-06-14
 再新建DateConverter.java
 
 ```java
-package cn.itxiaoliu;
-
-import org.springframework.core.convert.converter.Converter;
-import org.springframework.stereotype.Component;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 @Component
 public class DateConverter implements Converter<String, Date> {
     SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
@@ -52,7 +36,6 @@ public class DateConverter implements Converter<String, Date> {
         return null;
     }
 }
-
 ```
 
 此时访问http://localhost:8080/hello?birth=1996-06-14
@@ -60,3 +43,7 @@ public class DateConverter implements Converter<String, Date> {
 程序返回
 
 ![1588143516791](C:\Users\MI\AppData\Roaming\Typora\typora-user-images\1588143516791.png)
+
+文件结构如下
+
+![1592212475520](C:\Users\MI\AppData\Roaming\Typora\typora-user-images\1592212475520.png)

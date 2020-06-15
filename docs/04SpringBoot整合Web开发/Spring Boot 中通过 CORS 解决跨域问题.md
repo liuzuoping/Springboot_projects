@@ -19,17 +19,9 @@
 首先创建两个普通的 Spring Boot 项目，这个就不用我多说，第一个命名为 provider 提供服务，第二个命名为 consumer 消费服务，第一个配置端口为 8080 ，第二个配置配置为 8081 ，然后在 provider 上提供两个 hello 接口，一个 get ，一个 post ，如下：
 
 ```java
-package cors1;
-
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RestController;
-
 @RestController
 public class HelloController {
     @GetMapping("/hello")
-    //@CrossOrigin(origins = "http://localhost:8081")
     public String hello(){
         return "hello cors!";
     }
@@ -38,7 +30,6 @@ public class HelloController {
         return "doPut";
     }
 }
-
 ```
 
 在 cors2 的 resources/static 目录下创建一个 html 文件，发送一个简单的 ajax 请求，如下：
@@ -87,17 +78,16 @@ Access to XMLHttpRequest at 'http://localhost:8080/hello' from origin 'http://lo
 
 ```java
 @RestController
-public class HelloController {    
-@CrossOrigin(value = "http://localhost:8081")    
-@GetMapping("/hello")    
-public String hello() {        
-return "hello";    
-}    
-@CrossOrigin(value = "http://localhost:8081")    
-@PostMapping("/hello")    
-public String hello2() {       
-return "post hello";    
-}
+public class HelloController {
+    @GetMapping("/hello")
+    @CrossOrigin(origins = "http://localhost:8081")
+    public String hello(){
+        return "hello cors!";
+    }
+    @PutMapping("/doput")
+    public String doPut(){
+        return "doPut";
+    }
 }
 ```
 
@@ -112,11 +102,6 @@ return "post hello";
 provider 上，每一个方法上都去加注解未免太麻烦了，在 Spring Boot 中，还可以通过全局配置一次性解决这个问题，全局配置只需要在配置类中重写 addCorsMappings 方法即可，如下：
 
 ```java
-package cors1;
-
-import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.config.annotation.CorsRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 public class WebMvcConfig implements WebMvcConfigurer {
 
@@ -128,7 +113,6 @@ public class WebMvcConfig implements WebMvcConfigurer {
                 .maxAge(30*1000);
     }
 }
-
 ```
 
 `/**` 表示本应用的所有方法都会去处理跨域请求， allowedMethods 表示允许通过的请求数，allowedHeaders 则表示允许的请求头。经过这样的配置之后，就不必在每个方法上单独配置跨域了。

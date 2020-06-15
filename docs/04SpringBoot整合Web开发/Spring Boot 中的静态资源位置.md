@@ -39,11 +39,15 @@ public class SpringMVCConfig extends WebMvcConfigurationSupport {
 
 首先，在 Spring Boot 中，默认情况下，一共有5个位置可以放静态资源，五个路径分别是如下5个：
 
-1. classpath:/META-INF/resources/
-2. classpath:/resources/
-3. classpath:/static/
-4. classpath:/public/
-5. /
+1. ```
+   1. classpath:/META-INF/resources/
+   2. classpath:/resources/
+   3. classpath:/static/
+   4. classpath:/public/
+   5. /
+   ```
+
+   
 
 前四个目录好理解，分别对应了resources目录下不同的目录，第5个 `/` 是啥意思呢？我们知道，在 Spring Boot 项目中，默认是没有 webapp 这个目录的，当然我们也可以自己添加（例如在需要使用JSP的时候），这里第5个 `/` 其实就是表示 webapp 目录中的静态资源也不被拦截。如果同一个文件分别出现在五个目录下，那么优先级也是按照上面列出的顺序。
 
@@ -93,11 +97,6 @@ spring.mvc.static-path-pattern=/**
 当然，在Spring Boot中我们也可以通过 Java代码来自定义，方式和 Java 配置的 SSM 比较类似，如下：
 
 ```java
-package staticresources.config;
-
-import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 public class WebMvcConfig implements WebMvcConfigurer {
     @Override
@@ -105,8 +104,11 @@ public class WebMvcConfig implements WebMvcConfigurer {
         registry.addResourceHandler("/**").addResourceLocations("classpath:/xiaoliu/");
     }
 }
-
 ```
 
-这里代码基本和前面一致，比较简单，不再赘述。
+这里代码基本和前面一致，比较简单
+
+文件目录如下
+
+![1592201511016](C:\Users\MI\AppData\Roaming\Typora\typora-user-images\1592201511016.png)
 

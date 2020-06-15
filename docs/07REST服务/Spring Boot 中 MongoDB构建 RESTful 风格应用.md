@@ -62,41 +62,7 @@ public class Book {
     private Integer id;
     private String name;
     private String author;
-
-    @Override
-    public String toString() {
-        return "Book{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", author='" + author + '\'' +
-                '}';
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(String author) {
-        this.author = author;
-    }
-}
-
+//getter&setter&toString()
 ```
 
 这里一个是配置了一个实体类 Book，另一个则是配置了一个 BookRepository ，项目启动成功后，框架会根据 Book 类的定义，在数据库中自动创建相应的表，BookRepository 接口则是继承自 JpaRepository ，JpaRepository 中自带了一些基本的增删改查方法。
@@ -114,13 +80,12 @@ public class Book {
 
 
 ```java
-package cn.itxiaoliu.dao;
-
-import cn.itxiaoliu.bean.Book;
-import org.springframework.data.mongodb.repository.MongoRepository;
-
 public interface BookDao extends MongoRepository<Book,Integer> {
 
 }
 
 ```
+
+![1592227167772](C:\Users\MI\AppData\Roaming\Typora\typora-user-images\1592227167772.png)
+
+![1592227187088](C:\Users\MI\AppData\Roaming\Typora\typora-user-images\1592227187088.png)

@@ -2,22 +2,9 @@
 
 ### Springboot实现单文件上传
 
-在启动类父文件夹下新建文件FileUploadController.java
+在启动类父文件夹下新建文件**FileUploadController.java**
 
 ```java
-package fileupload;
-
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
-
-import javax.servlet.http.HttpServletRequest;
-import java.io.File;
-import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.UUID;
-
 @RestController
 public class FileUploadController {
     SimpleDateFormat sdf=new SimpleDateFormat("yyyy/MM/dd");
@@ -41,10 +28,9 @@ public class FileUploadController {
         return "error";
     }
 }
-
 ```
 
-再static包下新建index.html
+## 再static包下新建index.html
 
 ```html
 <!DOCTYPE html>
@@ -66,23 +52,11 @@ public class FileUploadController {
 
 ```
 spring.servlet.multipart.max-file-size=1MB
-
 ```
 
 在启动类父文件夹下新建文件MyCustomException.java文件
 
 ```java
-package fileupload;
-
-import org.springframework.web.bind.annotation.ControllerAdvice;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.multipart.MaxUploadSizeExceededException;
-import org.springframework.web.servlet.ModelAndView;
-
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.io.PrintWriter;
-
 @ControllerAdvice
 public class MyCustomException {
 //    @ExceptionHandler(MaxUploadSizeExceededException.class)
@@ -101,7 +75,6 @@ public class MyCustomException {
         return mv;
     }
 }
-
 ```
 
 再在templates包下加入错误页面myerror.html

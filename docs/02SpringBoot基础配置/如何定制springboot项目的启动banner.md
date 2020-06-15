@@ -19,16 +19,8 @@ http://patorjk.com/software/taag
 只需要在启动类做如下配置
 
 ```java
-package cn.itxiaoliu;
-
-import org.springframework.boot.Banner;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.builder.SpringApplicationBuilder;
-
 @SpringBootApplication
 public class DemoApplication {
-
     public static void main(String[] args) {
         //SpringApplication.run(DemoApplication.class, args);
         SpringApplicationBuilder builder=new SpringApplicationBuilder(DemoApplication.class);
@@ -36,8 +28,6 @@ public class DemoApplication {
         build.setBannerMode(Banner.Mode.OFF);
         build.run(args);
     }
-
 }
-
 ```
 

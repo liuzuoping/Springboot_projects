@@ -3,11 +3,6 @@
 在 Spring Boot 项目中 ，异常统一处理，可以使用 Spring 中 @ControllerAdvice 来统一处理，也可以自己来定义异常处理方案。Spring Boot 中，对异常的处理有一些默认的策略，我们分别来看。
 
 ```java
-package exception;
-
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
-
 @RestController
 public class HelloController {
     @GetMapping("/hello")
@@ -16,7 +11,6 @@ public class HelloController {
         return "hello";
     }
 }
-
 ```
 
 默认情况下，Spring Boot 中的异常页面 是这样的：
@@ -92,7 +86,9 @@ public class HelloController {
 
 如果动态页面和静态页面同时定义了异常处理页面，例如 `classpath:/static/error/404.html` 和 `classpath:/templates/error/404.html` 同时存在时，默认使用动态页面。即完整的错误页面查找方式应该是这样：
 
-发生了500错误–>查找动态 500.html 页面–>查找静态 500.html –> 查找动态 5xx.html–>查找静态 5xx.html。
+#### 发生了500错误–>查找动态 500.html 页面–>查找静态 500.html –> 查找动态 5xx.html–>查找静态 5xx.html。
+
+
 
 # 自定义异常数据
 
@@ -108,17 +104,8 @@ DefaultErrorAttributes 类本身则是在org.springframework.boot.autoconfigure.
 具体定义如下：
 
 ```java
-package exception;
-
-import org.springframework.boot.web.servlet.error.DefaultErrorAttributes;
-import org.springframework.stereotype.Component;
-import org.springframework.web.context.request.WebRequest;
-
-import java.util.Map;
-
 @Component
 public class MyErrorAttribute extends DefaultErrorAttributes {
-
     @Override
     public Map<String, Object> getErrorAttributes(WebRequest webRequest, boolean includeStackTrace) {
         Map<String, Object> map = super.getErrorAttributes(webRequest, includeStackTrace);
@@ -138,24 +125,11 @@ public class MyErrorAttribute extends DefaultErrorAttributes {
 异常视图默认就是前面所说的静态或者动态页面，这个也是可以自定义的，首先 ，默认的异常视图加载逻辑在 org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController 类的 errorHtml 方法中，这个方法用来返回异常页面+数据，还有另外一个 error 方法，这个方法用来返回异常数据（如果是 ajax 请求，则该方法会被触发）。
 
 ```java
-package exception;
-
-import org.springframework.boot.autoconfigure.web.ResourceProperties;
-import org.springframework.boot.autoconfigure.web.servlet.error.DefaultErrorViewResolver;
-import org.springframework.context.ApplicationContext;
-import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Component;
-import org.springframework.web.servlet.ModelAndView;
-
-import javax.servlet.http.HttpServletRequest;
-import java.util.Map;
-
 @Component
 public class MyErrorViewResolver extends DefaultErrorViewResolver {
     public MyErrorViewResolver(ApplicationContext applicationContext, ResourceProperties resourceProperties) {
         super(applicationContext, resourceProperties);
     }
-
     @Override
     public ModelAndView resolveErrorView(HttpServletRequest request, HttpStatus status, Map<String, Object> model) {
         ModelAndView mv = new ModelAndView();
@@ -164,7 +138,6 @@ public class MyErrorViewResolver extends DefaultErrorViewResolver {
         return mv;
     }
 }
-
 ```
 
 在该方法中 ，首先会通过 getErrorAttributes 方法去获取异常数据（实际上会调用到 ErrorAttributes 的实例 的 getErrorAttributes 方法），然后调用 resolveErrorView 去创建一个 ModelAndView ，如果这里创建失败，那么用户将会看到默认的错误提示页面。
@@ -208,14 +181,10 @@ public class MyErrorViewResolver extends DefaultErrorViewResolver {
 </html>
 ```
 
-正常情况下， resolveErrorView 方法会来到 DefaultErrorViewResolver 类的 resolveErrorView 方法中
+此时访问 http://localhost:8080/hello 
 
-在这里，首先以异常响应码作为视图名分别去查找动态页面和静态页面，如果没有查找到，则再以 4xx 或者 5xx 作为视图名再去分别查找动态或者静态页面。
+![1592203826039](C:\Users\MI\AppData\Roaming\Typora\typora-user-images\1592203826039.png)
 
-要自定义异常视图解析，也很容易 ，由于 DefaultErrorViewResolver 是在 ErrorMvcAutoConfiguration 类中提供的实例，即开发者没有提供相关实例时，会使用默认的 DefaultErrorViewResolver ，开发者提供了自己的 ErrorViewResolver 实例后，默认的配置就会失效，因此，自定义异常视图，只需要提供 一个 ErrorViewResolver 的实例即可
+文件结构如下
 
-实际上，开发者也可以在这里定义异常数据（直接在 resolveErrorView 方法重新定义一个 model ，将参数中的model 数据拷贝过去并修改，注意参数中的 model 类型为 UnmodifiableMap，即不可以直接修改），而不需要自定义MyErrorAttributes。定义完成后，提供一个名为123的视图，如下图：
-
-[![img](https://www.javaboy.org/images/boot/4-6.png)](https://www.javaboy.org/images/boot/4-6.png)
-
-如此之后，错误试图就算定义成功了。
+![1592203885316](C:\Users\MI\AppData\Roaming\Typora\typora-user-images\1592203885316.png)

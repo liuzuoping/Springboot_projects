@@ -128,11 +128,9 @@ public class HelloController {
         System.out.println(ops.get("name"));
     }
 }
-
-
 ```
 
-另外需要注意 ，Spring Boot 的自动化配置，只能配置单机的 Redis ，如果是 Redis 集群，则所有的东西都需要自己手动配置，关于如何操作 Redis 集群，松哥以后再来和大家分享。
+另外需要注意 ，Spring Boot 的自动化配置，只能配置单机的 Redis ，如果是 Redis 集群，则所有的东西都需要自己手动配置
 
 # 方案二：Spring Cache
 

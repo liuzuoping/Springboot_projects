@@ -52,10 +52,6 @@ pom.xml引入以下依赖
 在启动类父文件夹中新建service文件夹并在其下新建UserService.java
 
 ```java
-package cn.itxiaoliu.aop.service;
-
-import org.springframework.stereotype.Service;
-
 @Service
 public class UserService {
     public String getUsernameById(Integer id){
@@ -66,19 +62,11 @@ public class UserService {
         System.out.println("deleteUserById");
     }
 }
-
 ```
 
 在启动类父文件夹下新建UserController.java
 
 ```java
-package cn.itxiaoliu.aop;
-
-import cn.itxiaoliu.aop.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
-
 @RestController
 public class UserController {
     @Autowired
@@ -92,19 +80,11 @@ public class UserController {
         userService.deleteUserById(id);
     }
 }
-
 ```
 
 再新建LogComponent.java
 
 ```java
-package cn.itxiaoliu.aop;
-
-import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.annotation.*;
-import org.springframework.stereotype.Component;
-
 @Component
 @Aspect
 public class LogComponent  {
@@ -137,7 +117,6 @@ public class LogComponent  {
         return "www.xiaoliu.com";
     }
 }
-
 ```
 
 浏览器访问

@@ -47,21 +47,28 @@ spring.datasource.password=960614abcd
 spring.datasource.url=jdbc:mysql:///ssm
 ```
 
+文件目录如下
+
+![1592216825603](C:\Users\MI\AppData\Roaming\Typora\typora-user-images\1592216825603.png)
+
+创建实体类
+
+```java
+public class User {
+    private Integer id;
+    private String username;
+    private String address;
+    //getter&setter&toString()
+```
+
+
+
 配置完成后，MyBatis就可以创建Mapper来使用了，例如我这里直接创建一个UserMapper，如下：
 
 ```java
-package cn.itxiaoliu.mapper;
-
-import cn.itxiaoliu.bean.User;
-import org.apache.ibatis.annotations.Mapper;
-
-import java.util.List;
-
-
 public interface UserMapper {
     List<User> getAllUser();
 }
-
 ```
 
 这里是通过全注解的方式来写SQL，不写XML文件，@Select、@Insert、@Update以及@Delete四个注解分别对应XML中的select、insert、update以及delete标签，@Results注解类似于XML中的ResultMap映射文件（getUserById方法给查询结果的字段取别名主要是向小伙伴们演示下`@Results`注解的用法），另外使用@SelectKey注解可以实现主键回填的功能，即当数据插入成功后，插入成功的数据id会赋值到user对象的id属性上。
@@ -95,7 +102,6 @@ public class MybatisApplication {
     </select>
 
 </mapper>
-
 ```
 
 将接口中方法对应的SQL直接写在XML文件中。
@@ -131,6 +137,24 @@ mybatis.mapper-locations=classpath:mapper/*.xml
 ```
 
 如此配置之后，mapper就可以正常使用了。注意第二种方式不需要在pom.xml文件中配置文件过滤。
+
+### 测试类代码
+
+```java
+@RunWith(SpringRunner.class)
+@SpringBootTest
+public class MybatisApplicationTests {
+    @Autowired
+    UserMapper userMapper;
+    @Test
+    public void contextLoads() {
+        List<User> allUser=userMapper.getAllUser();
+        System.out.println(allUser);
+    }
+}
+```
+
+
 
 ## 原理分析
 
